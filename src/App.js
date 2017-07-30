@@ -82,6 +82,7 @@ class App extends Component {
     this.startQuiz = this.startQuiz.bind(this);
     this.retakeQuiz = this.retakeQuiz.bind(this);
     this.startTimer = this.startTimer.bind(this);
+    this.setState = this.setState.bind(this);
   }
 
   startQuiz() {
