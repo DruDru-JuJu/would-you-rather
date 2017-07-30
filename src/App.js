@@ -27,7 +27,7 @@ const AskQuestion = props => {
     <div className="App">
       <div className="App-header">
         <h1>Would you rather...</h1>
-        <h2>Seconds Remaining: {props.Timer}</h2>
+        <h2>Seconds Remaining: {props.timer}</h2>
       </div>
       <container className="flexcontainer">
         <a id="button-left" onClick={ () => props.nextQuestion(0) } className="flex-center-vertically">
@@ -66,11 +66,10 @@ class App extends Component {
     super();
     this.state = {
       question: -1,
-      secondsPassed: 0,
+      timer: 10,
     };
 
     this.answerList = [];
-    this.Timer = 10 - this.state.secondsPassed;
     this.nextQuestion = this.nextQuestion.bind(this);
     this.startQuiz = this.startQuiz.bind(this);
     this.retakeQuiz = this.retakeQuiz.bind(this);
@@ -84,10 +83,10 @@ class App extends Component {
   startTimer() {
     this.setState ( (prevState => {
         setInterval(function () {
-        prevState.secondsPassed + 1;
+        prevState.timer - 1;
       }, 1000);
     }))
-    console.log(this.state.secondsPassed);
+    console.log(this.state.timer);
   }
 
   nextQuestion (index) {
@@ -126,7 +125,7 @@ class App extends Component {
         <AskQuestion 
         nextQuestion = { this.nextQuestion } 
         question = { this.state.question}
-        Timer = { this.Timer }
+        timer = { this.state.timer }
         />
       )
     }
