@@ -1,0 +1,85 @@
+.flexcontainer {
+   display: -webkit-flex;
+   display: flex;
+   -webkit-flex-direction: row;
+   flex-direction: row;
+   -webkit-align-items: center;
+   align-items: center;
+   -webkit-justify-content: center;
+   justify-content: center;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url(https://fonts.googleapis.com/css?family=Fira+Sans);
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+@import url(https://fonts.googleapis.com/css?family=Droid+Sans);
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #222;
+  font-family: "Fira Sans";
+  text-align: center;
+  line-height: 550%;
+}
+
+li {
+  font-size: 2.5em;
+  color: white;
+  list-style-type: none;
+}
+
+h1 {
+  font-size: 3em;
+}
+
+a {
+  height: 95%;
+  width: 40%;
+  margin-top: 5%;
+  font-size: 40px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  text-decoration: none;
+  color: white;
+  background: #F2385A;
+  position: relative;
+  margin: 30px;
+  top: 100px;
+  padding: 16px;
+  font-size: 50px;
+  border-radius: 10px;
+  box-shadow: 0px 15px 0px 0px #f02046, 0px 0px 20px 0px #bbb;
+  transition: all 0.2s;
+}
+
+a:active {
+  top: 108px;
+  box-shadow: 0px 7px 0px 0px #f02046;
+}
+
+#button-right {
+  margin-left: 1%;
+  background-color: #F2385A;
+}
+
+#button-left {
+  margin-right: 1%;
+  background-color: #3498DB;
+  box-shadow: 0px 15px 0px 0px #258cd1;
+}
+
+#button-left:active {
+  box-shadow: 0px 7px 0px 0px #258cd1;
+}
+
+.flex-center-vertically {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+container {
+  height: 900px;
+}
