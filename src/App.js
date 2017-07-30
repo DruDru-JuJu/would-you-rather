@@ -30,10 +30,18 @@ const AskQuestion = props => {
         <h2>Seconds Remaining: {props.timer}</h2>
       </div>
       <container className="flexcontainer">
-        <a id="button-left" onClick={ () => props.nextQuestion(0) } className="flex-center-vertically">
+        <a id="button-left" onClick={ 
+          () =>  { 
+            props.nextQuestion(0);
+            props.startTimer();
+          }} className="flex-center-vertically">
           <span>{ questionList[props.question][0] }</span>
         </a>
-        <a id="button-right" onClick={ () => props.nextQuestion(1) } className="flex-center-vertically">
+        <a id="button-right" onClick={ 
+          () => { 
+            props.nextQuestion(1) 
+            props.startTimer();
+          }} className="flex-center-vertically">
           <span>{ questionList[props.question][1] }</span>
         </a>
       </container>
@@ -81,11 +89,11 @@ class App extends Component {
   }
 
   startTimer() {
-    this.setState ( (prevState => {
-        setInterval(function () {
+    setInterval(function () {
+      this.setState(prevState => {
         prevState.timer - 1;
-      }, 1000);
-    }))
+      })
+    }, 1000);
     console.log(this.state.timer);
   }
 
@@ -126,6 +134,7 @@ class App extends Component {
         nextQuestion = { this.nextQuestion } 
         question = { this.state.question}
         timer = { this.state.timer }
+        startTimer = { this.startTimer }
         />
       )
     }
