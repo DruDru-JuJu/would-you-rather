@@ -77,6 +77,7 @@ class App extends Component {
       timer: 10,
     };
 
+    this.question = -1;
     this.answerList = [];
     this.nextQuestion = this.nextQuestion.bind(this);
     this.startQuiz = this.startQuiz.bind(this);
@@ -89,26 +90,37 @@ class App extends Component {
     this.setState({question: 0});
   }
 
-  startTimer() {
-    setInterval(function () {
+  startTimer(question) {
+    let tenTimer = setTimeout( () => {
       this.setState(prevState => {
-        prevState.timer - 1;
-      })
-    }, 1000);
-    console.log(this.state.timer);
+        prevState.timer--;
+        if (this.question !== question) {
+          console.log('done');
+        } else if (prevState.question !== 3 && prevState.timer === -1) {
+          prevState.timer = 10;
+          prevState.question++;
+          this.answerList.push("Did not answer");
+          this.question++;
+        } else {
+          console.log(prevState.timer);
+          this.startTimer();
+        }
+    })}, 1000);
   }
 
   nextQuestion (index) {
     this.setState(prevState => {
       this.answerList.push(questionList[prevState.question][index]);
       prevState.question++;
+      prevState.timer = 10;
     });
     console.log(this.answerList);
+    console.log(this.state.question);
   }
 
   retakeQuiz() {
     console.log(this.state.question, this.answerList);
-    this.setState({question: -1});
+    this.setState({question: -1, timer: 10});
     this.answerList=[];
   }
 
@@ -126,7 +138,7 @@ class App extends Component {
       return (
         <StartGame 
           startQuiz = { this.startQuiz }
-          startTimer = { this.startTimer }
+          startTimer = { () => { this.startTimer(0) } }
         />
       );
     } else {
@@ -135,7 +147,7 @@ class App extends Component {
         nextQuestion = { this.nextQuestion } 
         question = { this.state.question}
         timer = { this.state.timer }
-        startTimer = { this.startTimer }
+        startTimer = { () => { this.startTimer(++this.question) } }
         />
       )
     }
