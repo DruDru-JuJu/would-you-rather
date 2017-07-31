@@ -19,8 +19,6 @@ class App extends Component {
     this.nextQuestion = this.nextQuestion.bind(this);
     this.startQuiz = this.startQuiz.bind(this);
     this.retakeQuiz = this.retakeQuiz.bind(this);
-    this.startTimer = this.startTimer.bind(this);
-    this.setState = this.setState.bind(this);
   }
 
   startQuiz() {
@@ -31,17 +29,19 @@ class App extends Component {
   }
 
   startTimer(question) {
-    this.setState({ timer: 10 });
+    this.setState({ timer: 11 });
     this.tickTimer(++question);
   }
   
   tickTimer(question) {
     setTimeout(() => {
       this.setState(prevState => {
-        if (prevState.question !== question) {
+        if (this.state.question !== question || question === 3) {
           return;
-        } else if (--prevState.timer < 0) {
-          this.nextQuestion();
+        } else if (--prevState.timer === 0) {
+          this.startTimer(prevState.question);
+          this.answerList.push('did not answer');
+          prevState.question++;
         } else {
           this.tickTimer(question);
         }
@@ -53,7 +53,7 @@ class App extends Component {
   nextQuestion (index) {
     this.setState(prevState => {
       this.startTimer(prevState.question);
-      this.answerList.push(index !== undefined ? questionList[prevState.question][index] : 'did not answer');
+      this.answerList.push(questionList[prevState.question][index]);
       prevState.question++;
     });
   }
