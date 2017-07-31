@@ -31,7 +31,7 @@ class App extends Component {
   }
 
   startTimer(question) {
-    this.setState({ timer: 10 })
+    this.setState({ timer: 10 });
     this.tickTimer(++question);
   }
   
